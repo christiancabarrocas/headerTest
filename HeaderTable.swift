@@ -1,5 +1,5 @@
 //
-//  headerViewControlleTableViewController.swift
+//  HeaderTable.swift
 //  headerTest
 //
 //  Created by Christian Cabarrocas on 21/11/14.
@@ -8,10 +8,21 @@
 
 import UIKit
 
-class headerViewControlleTableViewController: UITableViewController,UIScrollViewDelegate {
+class HeaderTable: UITableViewController,UIScrollViewDelegate {
 
-    let items = [
+    private let kTableHeaderHeight:CGFloat = 300.0
+    private let ktableHeaderCutAway:CGFloat = 50.0
+    var headerView:UIView!
+    var headerMaskLayer:CAShapeLayer!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableSetup()
+        setupTableHeader()
+    }
+    
+    let items = [
+        
         NewsItem(category: .World, summary:"Climate changes protests"),
         NewsItem(category: .Europe, summary:"Sctoland's Yes to independence shakes Europe"),
         NewsItem(category: .MiddleEast, summary:"Next we use the if let control structure"),
@@ -30,21 +41,15 @@ class headerViewControlleTableViewController: UITableViewController,UIScrollView
         NewsItem(category: .Europe, summary:"Sctoland's Yes to independence shakes Europe"),
         NewsItem(category: .World, summary:"Climate changes protests"),
         NewsItem(category: .Americas, summary:"We will need to change the table view data source methods")
-    ]
-    
-    private let kTableHeaderHeight:CGFloat = 300.0
-    private let ktableHeaderCutAway:CGFloat = 50.0
-    var headerView:UIView!
-    var headerMaskLayer:CAShapeLayer!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
         
+    ]
+
+
+    func tableSetup () {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 50;
-        setupTableHeader()
     }
-
+    
     func setupTableHeader () {
         headerView = tableView.tableHeaderView
         tableView.tableHeaderView = nil
@@ -106,4 +111,40 @@ class headerViewControlleTableViewController: UITableViewController,UIScrollView
         return cell
     }
 
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    }
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
+
+        var favoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Favorite" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            self.markAsFavorite()
+        })
+
+        favoriteAction.backgroundColor = UIColor.brownColor()
+        
+        var shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Share" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            self.share()
+        })
+
+        favoriteAction.backgroundColor = UIColor(red: 0.200, green: 0.200, blue: 0.600, alpha: 1)
+        
+        return [favoriteAction,shareAction]
+    }
+    
+    func markAsFavorite () {
+        
+    }
+    
+    func share () {
+        
+        let shareMenu = UIAlertController(title: nil, message: "Share using", preferredStyle: .ActionSheet)
+
+        let twitterAction = UIAlertAction(title: "Twitter", style: UIAlertActionStyle.Default, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+
+        shareMenu.addAction(twitterAction)
+        shareMenu.addAction(cancelAction)
+
+        self.presentViewController(shareMenu, animated: true, completion: nil)
+    }
 }
