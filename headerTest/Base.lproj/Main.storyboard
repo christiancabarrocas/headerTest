@@ -81,6 +81,9 @@
                             <outlet property="delegate" destination="Sqa-Uz-Kau" id="qmC-Hh-c6k"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="headerImage" destination="isc-IT-n8b" id="yR3-XC-7S1"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gw1-sv-Ikw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

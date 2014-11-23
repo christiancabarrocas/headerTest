@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Social
 
 class HeaderTable: UITableViewController,UIScrollViewDelegate {
 
@@ -14,6 +15,7 @@ class HeaderTable: UITableViewController,UIScrollViewDelegate {
     private let ktableHeaderCutAway:CGFloat = 50.0
     var headerView:UIView!
     var headerMaskLayer:CAShapeLayer!
+    @IBOutlet weak var headerImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +51,6 @@ class HeaderTable: UITableViewController,UIScrollViewDelegate {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 50;
     }
-    
     func setupTableHeader () {
         headerView = tableView.tableHeaderView
         tableView.tableHeaderView = nil
@@ -61,15 +62,10 @@ class HeaderTable: UITableViewController,UIScrollViewDelegate {
         headerMaskLayer = CAShapeLayer()
         headerMaskLayer.fillColor = UIColor.blackColor().CGColor
         headerView.layer.mask = headerMaskLayer
-        
+        applyFilterToImage()
         updateHeaderView()
 
     }
-    
-    override  func scrollViewDidScroll(scrollView: UIScrollView) {
-        updateHeaderView()
-    }
-    
     func updateHeaderView() {
         let effectiveHeight = kTableHeaderHeight-ktableHeaderCutAway/2
         var headerRect = CGRectMake(0, -effectiveHeight, tableView.bounds.width, kTableHeaderHeight)
@@ -85,23 +81,37 @@ class HeaderTable: UITableViewController,UIScrollViewDelegate {
         path.addLineToPoint(CGPointMake(headerRect.width, headerRect.height))
         path.addLineToPoint(CGPointMake(0, headerRect.height-ktableHeaderCutAway))
         headerMaskLayer?.path = path.CGPath
+        
+    }
+    func applyFilterToImage () {
+    
+        let filter = CIFilter(name:"CIPhotoEffectNoir")
+        let context = CIContext(options: nil)
+        let ciImage = CIImage(image: headerImage.image)
+        filter.setDefaults()
+        filter.setValue(ciImage, forKey: kCIInputImageKey)
+        let imageSize:CGRect = CGRectMake(headerImage.frame.origin.x, headerImage.frame.origin.y, headerImage.frame.width*2, headerImage.frame.height*2)
+        headerImage.image = UIImage(CGImage: context.createCGImage(filter.outputImage, fromRect: imageSize))
+        
+        
     }
     
+    override  func scrollViewDidScroll(scrollView: UIScrollView) {
+        updateHeaderView()
+    }
+
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
-    
     
     // MARK: - TABLE VIEW
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
-
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1
     }
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("customCell", forIndexPath: indexPath) as CustomCell
 
@@ -110,41 +120,49 @@ class HeaderTable: UITableViewController,UIScrollViewDelegate {
 
         return cell
     }
-
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     }
-    
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
 
         var favoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Favorite" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
             self.markAsFavorite()
         })
 
-        favoriteAction.backgroundColor = UIColor.brownColor()
-        
-        var shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Share" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            self.share()
-        })
-
         favoriteAction.backgroundColor = UIColor(red: 0.200, green: 0.200, blue: 0.600, alpha: 1)
         
-        return [favoriteAction,shareAction]
+        var shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Share" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            self.share(self.items[indexPath.row])
+        })
+
+        shareAction.backgroundColor = UIColor(red: 0.200, green: 0.800, blue: 0.200, alpha: 1)
+        
+        var deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            self.delete()
+        })
+        
+        return [favoriteAction,shareAction,deleteAction]
     }
+    
+    // MARK: - TABLE ACTIONS
     
     func markAsFavorite () {
         
     }
+    func share (itemToShare:NewsItem) {
+
+        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter) {
+            var tweetSheet = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+            tweetSheet.setInitialText(itemToShare.summary)
+            self.presentViewController(tweetSheet, animated: true, completion: nil)
+        }else {
+            let alertController = UIAlertController(title: "Twitter Account", message:
+                "You need to login into twitter in ios settings panel", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default,handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+    }
+    func delete () {
     
-    func share () {
-        
-        let shareMenu = UIAlertController(title: nil, message: "Share using", preferredStyle: .ActionSheet)
-
-        let twitterAction = UIAlertAction(title: "Twitter", style: UIAlertActionStyle.Default, handler: nil)
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-
-        shareMenu.addAction(twitterAction)
-        shareMenu.addAction(cancelAction)
-
-        self.presentViewController(shareMenu, animated: true, completion: nil)
     }
 }
