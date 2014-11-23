@@ -21,8 +21,8 @@
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-header" translatesAutoresizingMaskIntoConstraints="NO" id="isc-IT-n8b">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="November 2014" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPk-D9-seq">
-                                    <rect key="frame" x="23" y="257" width="232" height="35"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="November 2014" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPk-D9-seq">
+                                    <rect key="frame" x="23" y="23" width="200" height="34.5"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="30"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
@@ -33,8 +33,8 @@
                                 <constraint firstItem="isc-IT-n8b" firstAttribute="top" secondItem="6iS-Bn-yr7" secondAttribute="top" id="M0Z-Xh-DV2"/>
                                 <constraint firstAttribute="bottom" secondItem="isc-IT-n8b" secondAttribute="bottom" id="U3G-Va-r8o"/>
                                 <constraint firstItem="isc-IT-n8b" firstAttribute="leading" secondItem="6iS-Bn-yr7" secondAttribute="leading" id="X7z-S2-2z0"/>
-                                <constraint firstAttribute="bottom" secondItem="EPk-D9-seq" secondAttribute="bottom" constant="8" id="e2G-NA-eHx"/>
                                 <constraint firstAttribute="trailing" secondItem="isc-IT-n8b" secondAttribute="trailing" id="nNu-HB-Lj5"/>
+                                <constraint firstItem="EPk-D9-seq" firstAttribute="top" secondItem="isc-IT-n8b" secondAttribute="top" constant="23" id="p1N-IN-DKA"/>
                                 <constraint firstItem="EPk-D9-seq" firstAttribute="leading" secondItem="6iS-Bn-yr7" secondAttribute="leading" constant="23" id="tEV-0w-4eE"/>
                             </constraints>
                         </view>
