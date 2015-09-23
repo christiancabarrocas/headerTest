@@ -23,7 +23,7 @@ struct NewsItem {
         case Africa
         case Asia
         
-        func toString () -> String {
+        func type () -> String {
             switch self {
                 case .World:
                     return "World"
@@ -40,7 +40,7 @@ struct NewsItem {
             }
         }
         
-        func toColor () -> UIColor {
+        func color () -> UIColor {
             switch self {
             case .World:
                 return UIColor(red: 0.106, green: 0.680, blue: 0.125, alpha: 1)

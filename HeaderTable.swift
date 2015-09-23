@@ -51,6 +51,7 @@ class HeaderTable: UITableViewController,UIScrollViewDelegate {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 50;
     }
+    
     func setupTableHeader () {
         headerView = tableView.tableHeaderView
         tableView.tableHeaderView = nil
@@ -66,6 +67,7 @@ class HeaderTable: UITableViewController,UIScrollViewDelegate {
         updateHeaderView()
 
     }
+    
     func updateHeaderView() {
         let effectiveHeight = kTableHeaderHeight-ktableHeaderCutAway/2
         var headerRect = CGRectMake(0, -effectiveHeight, tableView.bounds.width, kTableHeaderHeight)
@@ -83,6 +85,7 @@ class HeaderTable: UITableViewController,UIScrollViewDelegate {
         headerMaskLayer?.path = path.CGPath
         
     }
+    
     func applyFilterToImage () {
     
         let filter = CIFilter(name:"CIPhotoEffectNoir")
@@ -109,19 +112,21 @@ class HeaderTable: UITableViewController,UIScrollViewDelegate {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
+    
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1
     }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("customCell", forIndexPath: indexPath) as CustomCell
-
-        let item = items[indexPath.row]
-        cell.newsItem = item
+        cell.newsItem = items[indexPath.row]
 
         return cell
     }
+    
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     }
+    
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
 
         var favoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Favorite" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
@@ -148,6 +153,7 @@ class HeaderTable: UITableViewController,UIScrollViewDelegate {
     func markAsFavorite () {
         
     }
+    
     func share (itemToShare:NewsItem) {
 
         if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter) {
@@ -162,6 +168,7 @@ class HeaderTable: UITableViewController,UIScrollViewDelegate {
             self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
+    
     func delete () {
     
     }

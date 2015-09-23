@@ -14,6 +14,7 @@
 		9E594FEF1A1FF0E500580E3F /* HeaderTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E594FEE1A1FF0E500580E3F /* HeaderTable.swift */; };
 		9E594FF11A1FF1DF00580E3F /* data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E594FF01A1FF1DF00580E3F /* data.swift */; };
 		9E594FF31A1FF4AE00580E3F /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E594FF21A1FF4AE00580E3F /* CustomCell.swift */; };
+		9ECB59B71A23D62A0063E7EA /* configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECB59B61A23D62A0063E7EA /* configuration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		9E594FEE1A1FF0E500580E3F /* HeaderTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeaderTable.swift; path = ../HeaderTable.swift; sourceTree = "<group>"; };
 		9E594FF01A1FF1DF00580E3F /* data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = data.swift; sourceTree = "<group>"; };
 		9E594FF21A1FF4AE00580E3F /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		9ECB59B61A23D62A0063E7EA /* configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = configuration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				9E594FEE1A1FF0E500580E3F /* HeaderTable.swift */,
+				9ECB59B61A23D62A0063E7EA /* configuration.swift */,
 				9E594FF01A1FF1DF00580E3F /* data.swift */,
 				9E594FF21A1FF4AE00580E3F /* CustomCell.swift */,
 				9E594FCE1A1FF05200580E3F /* AppDelegate.swift */,
@@ -215,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E594FEF1A1FF0E500580E3F /* HeaderTable.swift in Sources */,
+				9ECB59B71A23D62A0063E7EA /* configuration.swift in Sources */,
 				9E594FF11A1FF1DF00580E3F /* data.swift in Sources */,
 				9E594FF31A1FF4AE00580E3F /* CustomCell.swift in Sources */,
 				9E594FCF1A1FF05200580E3F /* AppDelegate.swift in Sources */,
@@ -401,6 +405,7 @@
 				9E594FEA1A1FF05200580E3F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9E594FEB1A1FF05200580E3F /* Build configuration list for PBXNativeTarget "headerTestTests" */ = {
 			isa = XCConfigurationList;
@@ -409,6 +414,7 @@
 				9E594FED1A1FF05200580E3F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

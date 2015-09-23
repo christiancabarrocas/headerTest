@@ -17,8 +17,8 @@ class CustomCell: UITableViewCell {
         
         didSet {
             if let item = newsItem {
-                categoryLabel.text = item.category.toString()
-                categoryLabel.textColor = item.category.toColor()
+                categoryLabel.text = item.category.type()
+                categoryLabel.textColor = item.category.color()
                 contentLabel.text = item.summary
             }
             else {
