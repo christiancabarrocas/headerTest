@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import Social
 
-class HeaderTable: UITableViewController,UIScrollViewDelegate {
+class HeaderTable: UITableViewController {
 
     private let kTableHeaderHeight:CGFloat = 300.0
     private let ktableHeaderCutAway:CGFloat = 50.0
@@ -47,12 +46,12 @@ class HeaderTable: UITableViewController,UIScrollViewDelegate {
     ]
 
 
-    func tableSetup () {
+    private func tableSetup () {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 50;
     }
     
-    func setupTableHeader () {
+    private func setupTableHeader () {
         headerView = tableView.tableHeaderView
         tableView.tableHeaderView = nil
         tableView.addSubview(headerView)
@@ -63,12 +62,12 @@ class HeaderTable: UITableViewController,UIScrollViewDelegate {
         headerMaskLayer = CAShapeLayer()
         headerMaskLayer.fillColor = UIColor.blackColor().CGColor
         headerView.layer.mask = headerMaskLayer
-        applyFilterToImage()
+        headerImage.blackAndWhite()
         updateHeaderView()
 
     }
     
-    func updateHeaderView() {
+    private func updateHeaderView() {
         let effectiveHeight = kTableHeaderHeight-ktableHeaderCutAway/2
         var headerRect = CGRectMake(0, -effectiveHeight, tableView.bounds.width, kTableHeaderHeight)
         if tableView.contentOffset.y < -effectiveHeight {
@@ -85,20 +84,7 @@ class HeaderTable: UITableViewController,UIScrollViewDelegate {
         headerMaskLayer?.path = path.CGPath
         
     }
-    
-    func applyFilterToImage () {
-    
-        let filter = CIFilter(name:"CIPhotoEffectNoir")
-        let context = CIContext(options: nil)
-        let ciImage = CIImage(image: headerImage.image)
-        filter.setDefaults()
-        filter.setValue(ciImage, forKey: kCIInputImageKey)
-        let imageSize:CGRect = CGRectMake(headerImage.frame.origin.x, headerImage.frame.origin.y, headerImage.frame.width*2, headerImage.frame.height*2)
-        headerImage.image = UIImage(CGImage: context.createCGImage(filter.outputImage, fromRect: imageSize))
-        
-        
-    }
-    
+
     override  func scrollViewDidScroll(scrollView: UIScrollView) {
         updateHeaderView()
     }
@@ -107,8 +93,6 @@ class HeaderTable: UITableViewController,UIScrollViewDelegate {
         return true
     }
     
-    // MARK: - TABLE VIEW
-
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
@@ -118,9 +102,8 @@ class HeaderTable: UITableViewController,UIScrollViewDelegate {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("customCell", forIndexPath: indexPath) as CustomCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("customCell", forIndexPath: indexPath) as! CustomCell
         cell.newsItem = items[indexPath.row]
-
         return cell
     }
     
@@ -130,46 +113,17 @@ class HeaderTable: UITableViewController,UIScrollViewDelegate {
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
 
         var favoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Favorite" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            self.markAsFavorite()
+            FavoritesManager.addFavorite(self.items[indexPath.row], presenter: self)
         })
 
         favoriteAction.backgroundColor = UIColor(red: 0.200, green: 0.200, blue: 0.600, alpha: 1)
         
         var shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Share" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            self.share(self.items[indexPath.row])
+            Share.twitter(self.items[indexPath.row], presenter: self)
         })
 
         shareAction.backgroundColor = UIColor(red: 0.200, green: 0.800, blue: 0.200, alpha: 1)
-        
-        var deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            self.delete()
-        })
-        
-        return [favoriteAction,shareAction,deleteAction]
-    }
-    
-    // MARK: - TABLE ACTIONS
-    
-    func markAsFavorite () {
-        
-    }
-    
-    func share (itemToShare:NewsItem) {
 
-        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter) {
-            var tweetSheet = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-            tweetSheet.setInitialText(itemToShare.summary)
-            self.presentViewController(tweetSheet, animated: true, completion: nil)
-        }else {
-            let alertController = UIAlertController(title: "Twitter Account", message:
-                "You need to login into twitter in ios settings panel", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default,handler: nil))
-            
-            self.presentViewController(alertController, animated: true, completion: nil)
-        }
-    }
-    
-    func delete () {
-    
+        return [favoriteAction,shareAction]
     }
 }
