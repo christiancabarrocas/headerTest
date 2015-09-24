@@ -63,30 +63,30 @@ class HeaderTable: UITableViewController {
         headerMaskLayer.fillColor = UIColor.blackColor().CGColor
         headerView.layer.mask = headerMaskLayer
         headerImage.blackAndWhite()
-        updateHeaderView()
+        tableView.updateHeaderView(tableView, headerView: headerView, layerMask: headerMaskLayer)
 
     }
     
-    private func updateHeaderView() {
-        let effectiveHeight = kTableHeaderHeight-ktableHeaderCutAway/2
-        var headerRect = CGRectMake(0, -effectiveHeight, tableView.bounds.width, kTableHeaderHeight)
-        if tableView.contentOffset.y < -effectiveHeight {
-            headerRect.origin.y = tableView.contentOffset.y
-            headerRect.size.height = -tableView.contentOffset.y + ktableHeaderCutAway/2
-        }
-        headerView.frame = headerRect
-        
-        let path = UIBezierPath()
-        path.moveToPoint(CGPointMake(0, 0))
-        path.addLineToPoint(CGPointMake(headerRect.width, 0))
-        path.addLineToPoint(CGPointMake(headerRect.width, headerRect.height))
-        path.addLineToPoint(CGPointMake(0, headerRect.height-ktableHeaderCutAway))
-        headerMaskLayer?.path = path.CGPath
-        
-    }
+//    private func updateHeaderView() {
+//        let effectiveHeight = kTableHeaderHeight-ktableHeaderCutAway/2
+//        var headerRect = CGRectMake(0, -effectiveHeight, tableView.bounds.width, kTableHeaderHeight)
+//        if tableView.contentOffset.y < -effectiveHeight {
+//            headerRect.origin.y = tableView.contentOffset.y
+//            headerRect.size.height = -tableView.contentOffset.y + ktableHeaderCutAway/2
+//        }
+//        headerView.frame = headerRect
+//        
+//        let path = UIBezierPath()
+//        path.moveToPoint(CGPointMake(0, 0))
+//        path.addLineToPoint(CGPointMake(headerRect.width, 0))
+//        path.addLineToPoint(CGPointMake(headerRect.width, headerRect.height))
+//        path.addLineToPoint(CGPointMake(0, headerRect.height-ktableHeaderCutAway))
+//        headerMaskLayer?.path = path.CGPath
+//        
+//    }
 
     override  func scrollViewDidScroll(scrollView: UIScrollView) {
-        updateHeaderView()
+        tableView.updateHeaderView(tableView, headerView: headerView, layerMask: headerMaskLayer)
     }
 
     override func prefersStatusBarHidden() -> Bool {
