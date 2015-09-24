@@ -14,7 +14,7 @@ class Share {
     class func twitter (itemToShare:NewsItem, presenter:UIViewController) {
         
         if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter) {
-            var tweetSheet = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+            let tweetSheet = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
             tweetSheet.setInitialText(itemToShare.summary)
             presenter.presentViewController(tweetSheet, animated: true, completion: nil)
         }else {

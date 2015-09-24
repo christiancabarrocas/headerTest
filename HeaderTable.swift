@@ -110,15 +110,15 @@ class HeaderTable: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]?  {
 
-        var favoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Favorite" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+        let favoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Favorite" , handler: { (action:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
             FavoritesManager.addFavorite(self.items[indexPath.row], presenter: self)
         })
 
         favoriteAction.backgroundColor = UIColor(red: 0.200, green: 0.200, blue: 0.600, alpha: 1)
         
-        var shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Share" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+        let shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Share" , handler: { (action:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
             Share.twitter(self.items[indexPath.row], presenter: self)
         })
 
