@@ -18,6 +18,7 @@
 		9E594FEF1A1FF0E500580E3F /* HeaderTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E594FEE1A1FF0E500580E3F /* HeaderTable.swift */; };
 		9E594FF11A1FF1DF00580E3F /* data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E594FF01A1FF1DF00580E3F /* data.swift */; };
 		9E594FF31A1FF4AE00580E3F /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E594FF21A1FF4AE00580E3F /* CustomCell.swift */; };
+		9E8F148C1BB456A400D291E3 /* CellActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8F148B1BB456A400D291E3 /* CellActions.swift */; settings = {ASSET_TAGS = (); }; };
 		9ECB59B71A23D62A0063E7EA /* configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECB59B61A23D62A0063E7EA /* configuration.swift */; };
 		9EFDFBCF1BB34A7A0017F916 /* TableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFDFBCE1BB34A7A0017F916 /* TableHeader.swift */; };
 /* End PBXBuildFile section */
@@ -48,6 +49,7 @@
 		9E594FEE1A1FF0E500580E3F /* HeaderTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeaderTable.swift; path = ../HeaderTable.swift; sourceTree = "<group>"; };
 		9E594FF01A1FF1DF00580E3F /* data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = data.swift; sourceTree = "<group>"; };
 		9E594FF21A1FF4AE00580E3F /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		9E8F148B1BB456A400D291E3 /* CellActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellActions.swift; sourceTree = "<group>"; };
 		9ECB59B61A23D62A0063E7EA /* configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = configuration.swift; sourceTree = "<group>"; };
 		9EFDFBCE1BB34A7A0017F916 /* TableHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				9E594FEE1A1FF0E500580E3F /* HeaderTable.swift */,
+				9E8F148B1BB456A400D291E3 /* CellActions.swift */,
 				9E20B8B41BB33AF9006BD97A /* TODO.swift */,
 				9E20B8AE1BB33787006BD97A /* ImageExtension.swift */,
 				9EFDFBCE1BB34A7A0017F916 /* TableHeader.swift */,
@@ -179,7 +182,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = ccs;
 				TargetAttributes = {
 					9E594FC81A1FF05200580E3F = {
@@ -237,6 +240,7 @@
 				9E594FEF1A1FF0E500580E3F /* HeaderTable.swift in Sources */,
 				9EFDFBCF1BB34A7A0017F916 /* TableHeader.swift in Sources */,
 				9E20B8AF1BB33787006BD97A /* ImageExtension.swift in Sources */,
+				9E8F148C1BB456A400D291E3 /* CellActions.swift in Sources */,
 				9E20B8B11BB339AA006BD97A /* Share.swift in Sources */,
 				9ECB59B71A23D62A0063E7EA /* configuration.swift in Sources */,
 				9E594FF11A1FF1DF00580E3F /* data.swift in Sources */,
@@ -297,6 +301,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -311,7 +316,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -347,7 +352,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -360,6 +365,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = headerTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ccs.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -370,6 +376,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = headerTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ccs.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -388,6 +395,7 @@
 				);
 				INFOPLIST_FILE = headerTestTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ccs.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/headerTest.app/headerTest";
 			};
@@ -403,6 +411,7 @@
 				);
 				INFOPLIST_FILE = headerTestTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ccs.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/headerTest.app/headerTest";
 			};

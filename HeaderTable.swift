@@ -13,7 +13,7 @@ class HeaderTable: UITableViewController {
     private let kTableHeaderHeight:CGFloat = 300.0
     private let ktableHeaderCutAway:CGFloat = 50.0
     var headerView:UIView!
-    var headerMaskLayer:CAShapeLayer!
+    var headerMaskLayer = CAShapeLayer()
     @IBOutlet weak var headerImage: UIImageView!
     
     override func viewDidLoad() {
@@ -64,26 +64,7 @@ class HeaderTable: UITableViewController {
         headerView.layer.mask = headerMaskLayer
         headerImage.blackAndWhite()
         tableView.updateHeaderView(tableView, headerView: headerView, layerMask: headerMaskLayer)
-
     }
-    
-//    private func updateHeaderView() {
-//        let effectiveHeight = kTableHeaderHeight-ktableHeaderCutAway/2
-//        var headerRect = CGRectMake(0, -effectiveHeight, tableView.bounds.width, kTableHeaderHeight)
-//        if tableView.contentOffset.y < -effectiveHeight {
-//            headerRect.origin.y = tableView.contentOffset.y
-//            headerRect.size.height = -tableView.contentOffset.y + ktableHeaderCutAway/2
-//        }
-//        headerView.frame = headerRect
-//        
-//        let path = UIBezierPath()
-//        path.moveToPoint(CGPointMake(0, 0))
-//        path.addLineToPoint(CGPointMake(headerRect.width, 0))
-//        path.addLineToPoint(CGPointMake(headerRect.width, headerRect.height))
-//        path.addLineToPoint(CGPointMake(0, headerRect.height-ktableHeaderCutAway))
-//        headerMaskLayer?.path = path.CGPath
-//        
-//    }
 
     override  func scrollViewDidScroll(scrollView: UIScrollView) {
         tableView.updateHeaderView(tableView, headerView: headerView, layerMask: headerMaskLayer)
@@ -111,19 +92,7 @@ class HeaderTable: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]?  {
-
-        let favoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Favorite" , handler: { (action:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
-            FavoritesManager.addFavorite(self.items[indexPath.row], presenter: self)
-        })
-
-        favoriteAction.backgroundColor = UIColor(red: 0.200, green: 0.200, blue: 0.600, alpha: 1)
-        
-        let shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Share" , handler: { (action:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
-            Share.twitter(self.items[indexPath.row], presenter: self)
-        })
-
-        shareAction.backgroundColor = UIColor(red: 0.200, green: 0.800, blue: 0.200, alpha: 1)
-
-        return [favoriteAction,shareAction]
+        return [CellActions.favoriteAction(self.items[indexPath.row], presenter: self),
+                CellActions.shareAction(self.items[indexPath.row], presenter: self)]
     }
 }

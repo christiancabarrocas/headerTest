@@ -13,6 +13,5 @@ struct TODO {
     let communications = "Alamofire installation"
     let parsing = "JSON Parsing from api"
     let tableviewcell = "Redesign"
-    let tableviewcellActions = "Create extension or class"
     let tableviewHeader = "Move outside controller"
 }
