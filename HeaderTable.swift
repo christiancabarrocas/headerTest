@@ -7,20 +7,33 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class HeaderTable: UITableViewController {
 
-    private let kTableHeaderHeight:CGFloat = 300.0
+    private let kTableHeaderHeight:CGFloat = 200.0
     private let ktableHeaderCutAway:CGFloat = 50.0
     var headerView:UIView!
     var headerMaskLayer = CAShapeLayer()
     @IBOutlet weak var headerImage: UIImageView!
+    @IBOutlet weak var nowDate:UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableSetup()
         setupTableHeader()
+        nowDate.text = String(format: "Now")
     }
+    
+//    let data = Alamofire.request(.GET, apiURL,encoding: .JSON).responseJSON { (request, response, data, error) in
+//        
+//        var json = JSON(data!)
+//        
+//        debugPrint(response)
+//        let news = response.2["results"]
+//    }
+
     
     let items = [
         
