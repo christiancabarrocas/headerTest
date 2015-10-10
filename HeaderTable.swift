@@ -26,6 +26,14 @@ class HeaderTable: UITableViewController {
         nowDate.text = String(format: "Now")
     }
     
+
+    let sta = Alamofire.request(.GET, apiURL)
+        .responseJSON { response in
+//            debugPrint(response)
+            let data = response.2
+            debugPrint(data)
+    }
+    
 //    let data = Alamofire.request(.GET, apiURL,encoding: .JSON).responseJSON { (request, response, data, error) in
 //        
 //        var json = JSON(data!)
