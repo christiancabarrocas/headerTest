@@ -21,27 +21,32 @@ class HeaderTable: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateNews()
         tableSetup()
         setupTableHeader()
         nowDate.text = String(format: "Now")
     }
-    
 
-    let sta = Alamofire.request(.GET, apiURL)
-        .responseJSON { response in
-//            debugPrint(response)
-            let data = response.2
-            debugPrint(data)
+    private func updateNews () {
+    
+        Alamofire.request(.GET, apiURL, parameters: nil)
+            .responseJSON { request, response, result in
+                switch result {
+                case .Success(let JSON):
+                    let news = JSON["results"]
+                    let counter:Int = JSON["num_results"] as! Int
+                    if counter > 0 {
+                        self.parseNews(news)
+                    }
+                case .Failure(let dataError, let error):
+                    print("Request failed with error: \(error)")
+                }
+        }
     }
     
-//    let data = Alamofire.request(.GET, apiURL,encoding: .JSON).responseJSON { (request, response, data, error) in
-//        
-//        var json = JSON(data!)
-//        
-//        debugPrint(response)
-//        let news = response.2["results"]
-//    }
-
+    private func parseNews (data:AnyObject!) {
+        print("Received news:\(data)")
+    }
     
     let items = [
         
