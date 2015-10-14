@@ -37,6 +37,7 @@ class HeaderTable: UITableViewController {
                 case .Success(let JSON):
                     let counter:Int = JSON["num_results"] as! Int
                     if counter > 0 {
+                        print("JSON RESULTS: \(JSON)")
                         self.parseNews(JSON["results"])
                     }
                 case .Failure( _, let error):
@@ -46,6 +47,11 @@ class HeaderTable: UITableViewController {
     }
     
     private func parseNews (data:AnyObject!) {
+        
+        let t = data as! Array<[String:String]>
+        let a = data as? NSArray
+        let b = a as! Array<[String:String]>
+
         let news = (data as? NSArray) as! Array<[String: String]>//Array?
         var receivedNews = [NewsItem]()
         for item in news {
