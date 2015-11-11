@@ -20,6 +20,7 @@
 		9E594FF11A1FF1DF00580E3F /* data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E594FF01A1FF1DF00580E3F /* data.swift */; };
 		9E594FF31A1FF4AE00580E3F /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E594FF21A1FF4AE00580E3F /* CustomCell.swift */; };
 		9E8F148C1BB456A400D291E3 /* CellActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8F148B1BB456A400D291E3 /* CellActions.swift */; settings = {ASSET_TAGS = (); }; };
+		9EAD46271BF3E7F30040326F /* CFilters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EAD46261BF3E7F30040326F /* CFilters.framework */; settings = {ASSET_TAGS = (); }; };
 		9ECB59B71A23D62A0063E7EA /* configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECB59B61A23D62A0063E7EA /* configuration.swift */; };
 		9EFDFBCF1BB34A7A0017F916 /* TableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFDFBCE1BB34A7A0017F916 /* TableHeader.swift */; };
 /* End PBXBuildFile section */
@@ -52,6 +53,7 @@
 		9E594FF01A1FF1DF00580E3F /* data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = data.swift; sourceTree = "<group>"; };
 		9E594FF21A1FF4AE00580E3F /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		9E8F148B1BB456A400D291E3 /* CellActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellActions.swift; sourceTree = "<group>"; };
+		9EAD46261BF3E7F30040326F /* CFilters.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CFilters.framework; sourceTree = "<group>"; };
 		9ECB59B61A23D62A0063E7EA /* configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = configuration.swift; sourceTree = "<group>"; };
 		9EFDFBCE1BB34A7A0017F916 /* TableHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableHeader.swift; sourceTree = "<group>"; };
 		A2FBA3FA384F25318295256D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EAD46271BF3E7F30040326F /* CFilters.framework in Frameworks */,
 				1C12F56A68D6795F756F24A7 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -155,6 +158,7 @@
 		CA0A5C035109F2B7247398F6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9EAD46261BF3E7F30040326F /* CFilters.framework */,
 				E476B7B080A0F0E73553A77D /* Pods.framework */,
 			);
 			name = Frameworks;
@@ -439,6 +443,10 @@
 			baseConfigurationReference = 3104716A5C61DBA8562F2864 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = headerTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ccs.$(PRODUCT_NAME:rfc1034identifier)";
@@ -451,6 +459,10 @@
 			baseConfigurationReference = A2FBA3FA384F25318295256D /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = headerTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ccs.$(PRODUCT_NAME:rfc1034identifier)";

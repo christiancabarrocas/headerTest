@@ -8,6 +8,8 @@
 
 import UIKit
 import Alamofire
+import CFilters
+
 //import SwiftyJSON
 
 class HeaderTable: UITableViewController {

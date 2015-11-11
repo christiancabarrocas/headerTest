@@ -1,0 +1,10 @@
+framework module CFilters {
+  umbrella header "CFilters.h"
+
+  export *
+  module * { export * }
+}
+
+module CFilters.Swift {
+    header "CFilters-Swift.h"
+}
